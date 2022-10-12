@@ -17,11 +17,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.personRepository = personRepository;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println(email);
         Person person = personRepository.findByEmail(email).
-                orElseThrow(()-> new UsernameNotFoundException("User doesn't exists"));
+                orElseThrow(()-> {
+                    System.out.println("такого нет!");
+                    return new UsernameNotFoundException("User doesn't exists");
+                });
         return SecurityUser.fromUser(person);
     }
 }

@@ -5,6 +5,7 @@ import com.lepesha.gymapp.exception.UserAlreadyExistsException;
 import com.lepesha.gymapp.model.Person;
 import com.lepesha.gymapp.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +23,7 @@ public class PersonService {
         person.setLastName(personDTO.getLastName());
         person.setEmail(personDTO.getEmail());
         person.setAge(personDTO.getAge());
-        person.setPassword(personDTO.getPassword());
+        person.setPassword(new BCryptPasswordEncoder(12).encode(personDTO.getPassword()));
         //person.setRoles(Arrays.asList("ROLE_USER"));
 
         return personRepository.save(person);
