@@ -1,3 +1,3 @@
 # GymApp
 
-some spring security things
+Some spring security things(basic auths) and also jwt that is located in another branch
